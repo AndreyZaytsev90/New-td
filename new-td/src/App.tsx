@@ -21,18 +21,23 @@ let defaultMoney: Array<MoneyType> = [
 ]
 
 // типизируем на входе и выходе
-export const moneyFilter = (money: Array<MoneyType>, filter: BanknotsType): MoneyType[] => {
+export const moneyFilter = (money: Array<MoneyType>, filterValue: BanknotsType): MoneyType[] => {
     console.log('moneyFilter')
-    debugger
     //если пришел filter со значением 'All', то возвращаем все банкноты
-    if (filter === 'Dollars') {
+    if (filterValue === 'All')
+    {
+        return defaultMoney
+    }
+    if (filterValue === 'Dollars') {
         return money.filter(m => m.banknotes === 'Dollars')
     }
-    if (filter === 'RUBLS') {
+    if (filterValue === 'RUBLS') {
         return money.filter(m => m.banknotes === 'RUBLS')
     }
-    else {
+    if (filterValue === 'All') {
         return money
+    }else {
+        return defaultMoney
     }
 }
 

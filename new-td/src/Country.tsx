@@ -29,7 +29,7 @@ export const Country = (props: CountryPropsType) => {
             <button onClick={setAll}>All</button>
             <button onClick={setDollars}>Dollars</button>
             <button onClick={setRUBLS}>RUBLS</button>
-            <City data={"передаем денежки в город"}/>
+            <City data={props.data}/>
         </div>
     );
 };
