@@ -1,6 +1,7 @@
 import React from 'react';
 import {CurrentBankomat} from "./CurrentBankomat";
 import {MoneyType} from "./App";
+import styled from "styled-components";
 
 type CityPropsType = {
     data: MoneyType[]
@@ -15,22 +16,31 @@ export const City = (props: CityPropsType) => {
     //    money={el}
     //   />
     // ))
-    const mappedMoney = props.data.map(el => {
+    const mappedMoney = props.data.map((el, index) => {
         return (
-            <div key={el.number}>
+          /*  <div key={el.number}>
                 <div>{el.banknotes}</div>
                 <div>{el.value}</div>
                 <div>{el.number}</div>
-            </div>
+            </div>*/
+            <CurrentBankomat money={el} key={index}/>
         )
     })
 
     return (
-        <div>
+        <Wrapper>
             {mappedMoney}
-        </div>
+        </Wrapper>
     );
 };
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 30px;
+`
 //1
 // Вроде все норм, но нужно причесать код. Давайте создадим const mappedMoney = props.data.map(el=>el...)
 // Т.е. нам нужно вынести map из вертски, оставив в верстке только mappedMoney
