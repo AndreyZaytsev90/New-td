@@ -1,63 +1,49 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Country} from "./Country";
+import {TasksPropsType, Todolist} from "./Todolist";
 
-export type BanknotsType = 'Dollars' | 'RUBLS' | 'All'
-export type MoneyType = {
-    banknotes: BanknotsType
-    value: number
-    number: string
-}
+export type FilterType = 'all' | 'active' | 'completed'
 
-let defaultMoney: Array<MoneyType> = [
-    {banknotes: 'Dollars', value: 100, number: ' a1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' z1234567890'},
-    {banknotes: 'RUBLS', value: 100, number: ' w1234567890'},
-    {banknotes: 'Dollars', value: 100, number: ' e1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' c1234567890'},
-    {banknotes: 'RUBLS', value: 100, number: ' r1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' x1234567890'},
-    {banknotes: 'RUBLS', value: 50, number: ' v1234567890'},
-]
-
-// типизируем на входе и выходе
-export const moneyFilter = (money: Array<MoneyType>, filterValue: BanknotsType): MoneyType[] => {
-    console.log('moneyFilter')
-    //если пришел filter со значением 'All', то возвращаем все банкноты
-    if (filterValue === 'All')
-    {
-        return defaultMoney
-    }
-    if (filterValue === 'Dollars') {
-        return money.filter(m => m.banknotes === 'Dollars')
-    }
-    if (filterValue === 'RUBLS') {
-        return money.filter(m => m.banknotes === 'RUBLS')
-    }
-    if (filterValue === 'All') {
-        return money
-    }else {
-        return defaultMoney
-    }
-}
 
 function App() {
 
-    const [money, setMoney] = useState<Array<MoneyType>>(defaultMoney)
-    const [filterValue, setFilterValue] = useState<BanknotsType>('All')
+    const title = "What to learn"
 
-    const filteredMoney = moneyFilter(money, filterValue)
+    const [tasks, setTasks] = useState<Array<TasksPropsType>>([
+        {id: 1, title: "HTML&CSS", isDone: true},
+        {id: 2, title: "JS", isDone: true},
+        {id: 3, title: "ReactJS", isDone: false},
+        {id: 4, title: "NodeJS", isDone: false},
+    ])
+
+    const removeTask = (taskID: number) => {
+        setTasks(tasks.filter(t => t.id !== taskID))
+    }
+
+    // let [filter, setFilter] = useState<FilterType>('all')
+    //
+    // const filterTask = (buttonName: FilterType) => {
+    //     setFilter(buttonName)
+    // }
+    //
+    // let filteredTasks = tasks
+    // if (filter === 'active') {
+    //     filteredTasks = tasks.filter(task => !task.isDone)
+    // }
+    // if (filter === 'completed') {
+    //     filteredTasks = tasks.filter(task => task.isDone)
+    // }
+
     return (
-        <div className="App">
-            <Country
-                data={filteredMoney}   //отрисовать будем деньги после фильтрации
-                setFilterValue={setFilterValue}  //useState передаем? Так можно было?!
+        <div className='App'>
+            <Todolist
+                title={title}
+                tasks={tasks}
+                removeTask={removeTask}
+                //filterTask={filterTask}
             />
         </div>
-    );
+    )
 }
 
-// Итого: в этой компоненте у нас мозги. А вот отрисовка где-то глубже. Погружаемся в Country
-
-
-export default App;
+export default App
