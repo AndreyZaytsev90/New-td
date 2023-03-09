@@ -19,28 +19,11 @@ export const CurrentBankomat = (props: CurrentBankomatPropsType) => {
 };
 
 const ColorMoney = styled.div`
-  background-color: ${props => {
-    if (props.color === 'green') {
-      return 'darkseagreen'
-    }else {
-        return 'cornflowerblue'
-    }}
-  };
+  background-color: ${props => props.color === 'green'
+          ? 'darkseagreen'
+          : 'cornflowerblue'};
   width: 400px;
   height: 200px;
   margin: 5px;
   text-align: center;
 `
-
-/*
-const GreenMoney = styled.div`
-  background-color: darkseagreen;
-  width: 400px;
-  height: 200px;
-`
-
-const BlueMoney = styled.div`
-  background-color: cornflowerblue;
-  width: 400px;
-  height: 200px;
-`*/
