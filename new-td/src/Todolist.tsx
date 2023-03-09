@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {FilterType} from "./App";
 
 export type TodolistPropsType = {
     title: string
     tasks: Array<TasksPropsType>
-    removeTask: (taskID: number) => void
+    removeTask: (taskID: string) => void
+    addTask: (taskTitle: string) => void
     //filterTask: (buttonName: FilterType) => void
 }
 
 export type TasksPropsType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -30,13 +31,17 @@ export const Todolist = (props: TodolistPropsType) => {
         filteredTasks = props.tasks.filter(task => task.isDone)
     }
 
+    const onChangeHandler = (value: ChangeEvent<HTMLInputElement>) => {
+        value.currentTarget
+    }
+
     return (
         <div className="App">
             <div>
                 <h3>{props.title}</h3>
                 <div>
-                    <input/>
-                    <button>+</button>
+                    <input onChange={onChangeHandler}/>
+                    <button onClick={() => props.addTask(props.title)}>+</button>
                 </div>
                 <ul>
                     {filteredTasks.map((el) =>
