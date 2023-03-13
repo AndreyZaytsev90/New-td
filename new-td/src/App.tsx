@@ -17,9 +17,12 @@ function App() {
         {id: v1(), title: "NodeJS", isDone: false},
     ])
 
+   /* console.log(tasks)
+    console.log(...tasks)*/
+
     const addTask = (taskTitle: string) => {
         let newTask = {id: v1(), title: taskTitle, isDone: false}
-        setTasks([newTask, ...tasks])
+        setTasks([newTask, ...tasks]) // разделись (...task), добавили новую таску (newTask) и оделись заново ( [] )
     }
 
     const removeTask = (taskID: string) => {
