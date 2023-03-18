@@ -17,8 +17,6 @@ function App() {
         {id: v1(), title: "NodeJS", isDone: false},
     ])
 
-   /* console.log(tasks)
-    console.log(...tasks)*/
 
     const addTask = (taskTitle: string) => {
         let newTask = {id: v1(), title: taskTitle, isDone: false}
